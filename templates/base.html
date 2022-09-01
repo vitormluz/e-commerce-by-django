@@ -1,7 +1,7 @@
 {% load static %}
 
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     {% include 'partials/_head.html' %}
@@ -13,6 +13,7 @@
     {% include 'partials/_nav.html' %}
 
     <main class="container mt-4 mb-4">
+        {% include 'partials/_messages.html' %}
         {% block conteudo %}{% endblock conteudo %}
     </main>
 
