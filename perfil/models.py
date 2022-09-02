@@ -1,4 +1,3 @@
-from tabnanny import verbose
 from django.db import models
 from utils.validacpf import valida_cpf
 from django.forms import ValidationError
