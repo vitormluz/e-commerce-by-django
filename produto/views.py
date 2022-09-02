@@ -1,5 +1,6 @@
 from . import models
 from django.views import View
+from perfil.models import Perfil
 from django.contrib import messages
 from django.http import HttpResponse
 from django.views.generic.list import ListView
@@ -79,8 +80,6 @@ class AdicionarAoCarrinho(View):
                 )
                 quantidade_carrinho = variacao_estoque
 
-            print('QUANTIDADE:::' , quantidade_carrinho)
-
             carrinho[variacao_id]['quantidade'] = quantidade_carrinho
             carrinho[variacao_id]['preco_quantitativo'] = preco_unitario * quantidade_carrinho
             carrinho[variacao_id]['preco_quantitativo_promocional'] = preco_unitario_promocional * quantidade_carrinho
@@ -148,6 +147,22 @@ class ResumoCompra(View):
         if not self.request.user.is_authenticated:
             messages.warning(self.request, 'Você tem que fazer login para acessar o carrinho de compras.')
             return redirect('perfil:criar')
+
+        perfil = Perfil.objects.filter(usuario=self.request.user).exists()
+
+        if not perfil:
+            messages.error(
+                self.request,
+                'Usuário sem perfil.'
+            )
+            return redirect('perfil:criar')
+
+        if not self.request.session.get('carrinho'):
+            messages.error(
+                self.request,
+                'Carrinho vazio.'
+            )
+            return redirect('produtos:lista')
 
         context = {
             'usuario': self.request.user,
