@@ -6,25 +6,29 @@
 
 <div class="row">
     <div class="col-lg">
-        <h1>Cadastro</h1>
 
-        <form action="" method="POST">
+        {% block titulo_cadastro %}
+        <h1>Cadastro</h1>
+        {% endblock titulo_cadastro %}
+
+        <form action="{% url 'perfil:criar' %}" method="POST">
             {% csrf_token %}
             {{ userform|crispy }}
             {{ perfilform|crispy }}
 
             <div class="row">
                 <div class="col">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg">Cadastrar</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" >Cadastrar</button>
                 </div>
             </div>
         </form>
     </div>
 
-
+    {% if not request.user.is_authenticated %}
     <div class="col-lg">
         <h1>Login</h1>
     </div>
+    {% endif %}
 </div>
 
 {% endblock conteudo %}

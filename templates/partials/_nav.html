@@ -27,6 +27,18 @@
                 </div>
             </li>
 
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Redes
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="https://github.com/vitormluz"><i class="fa-brands fa-github"></i></a>
+                    <a class="dropdown-item" href="https://www.instagram.com/2vitor.vm/"><i class="fa-brands fa-instagram"></i></a>
+                    <a class="dropdown-item" href="#"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </li>
+
             {% if request.session.carrinho %}
             <li class="nav-item">
                 <a class="nav-link nav-cart-link active" href="{% url 'produto:carrinho' %}">
