@@ -23,11 +23,6 @@ class DetalheProduto(DetailView):
 
 class AdicionarAoCarrinho(View):
     def get(self, *args, **kwargs):
-        # TODO limpar carrinho
-        #if self.request.session.get('carrinho'):
-        #    del self.request.session['carrinho']
-        #   self.request.session.save()
-
         http_referer = self.request.META.get(
             'HTTP_REFERER',
             reverse('produto:lista')
@@ -150,4 +145,13 @@ class Carrinho(View):
 
 class ResumoCompra(View):
     def get(self, *args, **kwargs):
-        return HttpResponse('Produto: Finalizar')
+        if not self.request.user.is_authenticated:
+            messages.warning(self.request, 'Você tem que fazer login para acessar o carrinho de compras.')
+            return redirect('perfil:criar')
+
+        context = {
+            'usuario': self.request.user,
+            'carrinho': self.request.session['carrinho'],
+        }
+
+        return render(self.request, 'produto/resumocompra.html', context)
