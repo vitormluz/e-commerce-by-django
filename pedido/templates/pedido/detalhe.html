@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load vmfilter %}
+{% load static %}
+
+
+{% block titulo %}{{ pedido }} | {% endblock titulo %}
+
+
+{% block conteudo %}
+
+{% include 'partials/_pedido.html' %}
+
+{% endblock conteudo %}
